@@ -1,14 +1,12 @@
-# .github/workflows/deploy.yml
-
 name: Deploy to GitHub Pages
 
 on:
   push:
     branches:
-      - main
+      - main  # פועל בכל פעם שנעשה push לענף main
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,10 +22,10 @@ jobs:
       run: npm install
 
     - name: Build project
-      run: npm run build
+      run: npm run build  # כאן מתבצעת הבנייה של TypeScript
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./dist
+        publish_dir: ./dist  # התיקייה שנוצרה ע"י npm run build
